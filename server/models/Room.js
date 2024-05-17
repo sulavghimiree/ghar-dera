@@ -33,7 +33,8 @@ const RoomSchema = new mongoose.Schema(
 
     unlockedUsers: [
       {
-        type: String,
+        type: mongoose.Types.ObjectId,
+        ref: "User",
       },
     ],
   },
