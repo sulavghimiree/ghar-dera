@@ -8,6 +8,8 @@ const {
   noOfRooms,
   findbyid,
   postRoom,
+  putRoom,
+  deleteRoom,
 } = require("../controllers/roomController");
 
 const authRouter = express.Router();
@@ -22,7 +24,11 @@ roomRouter.route("/find/location").get(locationRoom);
 roomRouter.route("/find/roomCount").get(noOfRooms);
 roomRouter.route("/find/:id").get(findbyid);
 
-roomRouter.route("/", verifyToken).post(postRoom);
+roomRouter.route("/").post(verifyToken, postRoom);
+roomRouter
+  .route("/:id")
+  .put(verifyToken, putRoom)
+  .delete(verifyToken, deleteRoom);
 
 module.exports = {
   authRouter,

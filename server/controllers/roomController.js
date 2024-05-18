@@ -75,6 +75,40 @@ const postRoom = async (req, res) => {
   }
 };
 
+const putRoom = async (req, res) => {
+  try {
+    const room = await Room.findById(req.params.id);
+    if (room.owner !== req.user.id) {
+      throw new Error("You are not allowed to update other people properties");
+    } else {
+      const updateRoom = await Room.findByIdAndUpdate(
+        req.params.id,
+        { $set: req.body },
+        { new: true }
+      );
+      return res.status(200).json(updateRoom);
+    }
+  } catch (err) {
+    return res.status(500).json(err.message);
+  }
+};
+
+const deleteRoom = async (req, res) => {
+  try {
+    const room = await Room.findById(req.params.id);
+
+    if (room.owner !== req.user.id) {
+      throw new Error("You are not allowed to delete other people properties");
+    } else {
+      await room.deleteOne();
+
+      return res.status(200).json({ msg: "Succesfully deleted property" });
+    }
+  } catch (err) {
+    return res.status(500).json(err.message);
+  }
+};
+
 module.exports = {
   getAllRooms,
   featuredRoom,
@@ -82,4 +116,6 @@ module.exports = {
   noOfRooms,
   findbyid,
   postRoom,
+  putRoom,
+  deleteRoom,
 };
