@@ -1,21 +1,10 @@
 const Room = require("../models/Room");
+const verifyToken = require("../middlewares/verifyToken");
 
 const getAllRooms = async (req, res) => {
   try {
     const rooms = await Room.find({});
     return res.status(200).json(rooms);
-  } catch (err) {
-    return res.status(500).json(err.message);
-  }
-};
-
-const featuredRoom = async (req, res) => {
-  try {
-    const featuredRooms = await Room.find({ featured: true }).populate(
-      "owner",
-      "-password"
-    );
-    return res.status(200).json(featuredRooms);
   } catch (err) {
     return res.status(500).json(err.message);
   }
@@ -41,7 +30,7 @@ const noOfRooms = async (req, res) => {
     if (location) {
       const totalRooms = (await Room.find(location)).length;
       return res.status(200).json({
-        location: location,
+        ...location,
         totalRooms: totalRooms,
       });
     } else {
@@ -54,7 +43,10 @@ const noOfRooms = async (req, res) => {
 
 const findbyid = async (req, res) => {
   try {
-    const room = await Room.find(req.params.id).populate("owner", "-password");
+    const room = await Room.findById(req.params.id).populate(
+      "owner",
+      "-password"
+    );
     if (!room) {
       throw new Error("No such room with such id");
     } else {
@@ -67,6 +59,7 @@ const findbyid = async (req, res) => {
 
 const postRoom = async (req, res) => {
   try {
+    console.log(req.user);
     const newRoom = await Room.create({ ...req.body, owner: req.user.id });
 
     return res.status(201).json(newRoom);
@@ -78,7 +71,7 @@ const postRoom = async (req, res) => {
 const putRoom = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
-    if (room.owner !== req.user.id) {
+    if (room.owner.toHexString() !== req.user.id) {
       throw new Error("You are not allowed to update other people properties");
     } else {
       const updateRoom = await Room.findByIdAndUpdate(
@@ -96,8 +89,7 @@ const putRoom = async (req, res) => {
 const deleteRoom = async (req, res) => {
   try {
     const room = await Room.findById(req.params.id);
-
-    if (room.owner !== req.user.id) {
+    if (room.owner.toHexString() !== req.user.id) {
       throw new Error("You are not allowed to delete other people properties");
     } else {
       await room.deleteOne();
@@ -111,7 +103,6 @@ const deleteRoom = async (req, res) => {
 
 module.exports = {
   getAllRooms,
-  featuredRoom,
   locationRoom,
   noOfRooms,
   findbyid,

@@ -3,7 +3,6 @@ const verifyToken = require("../middlewares/verifyToken");
 const { userRegister, userLogin } = require("../controllers/authController");
 const {
   getAllRooms,
-  featuredRoom,
   locationRoom,
   noOfRooms,
   findbyid,
@@ -19,16 +18,12 @@ authRouter.route("/register").post(userRegister);
 authRouter.route("/login").post(userLogin);
 
 roomRouter.route("/findAll").get(getAllRooms);
-roomRouter.route("/find/featured").get(featuredRoom);
 roomRouter.route("/find/location").get(locationRoom);
 roomRouter.route("/find/roomCount").get(noOfRooms);
 roomRouter.route("/find/:id").get(findbyid);
 
-roomRouter.route("/").post(verifyToken, postRoom);
-roomRouter
-  .route("/:id")
-  .put(verifyToken, putRoom)
-  .delete(verifyToken, deleteRoom);
+roomRouter.route("/").all(verifyToken).post(verifyToken, postRoom);
+roomRouter.route("/:id").all(verifyToken).put(putRoom).delete(deleteRoom);
 
 module.exports = {
   authRouter,
