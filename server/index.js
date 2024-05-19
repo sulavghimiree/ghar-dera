@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
 const cors = require("cors");
 const { authRouter, roomRouter } = require("./routes/route");
+const uploadController = require("./controllers/uploadController");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/users", authRouter);
 app.use("/rooms", roomRouter);
+app.use("/upload", uploadController);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server Started at PORT: ${process.env.PORT}`);
