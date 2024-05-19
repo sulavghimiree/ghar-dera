@@ -1,5 +1,4 @@
 const Room = require("../models/Room");
-const verifyToken = require("../middlewares/verifyToken");
 
 const getAllRooms = async (req, res) => {
   try {
