@@ -39,7 +39,7 @@ function App() {
           }
         />
         <Route
-          path="/roomDetails"
+          path="/roomDetails/:id"
           element={
             <>
               <Navbar />
