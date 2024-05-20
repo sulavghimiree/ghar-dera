@@ -1,22 +1,22 @@
 import React from "react";
-import "./Navbar.css";
+import classes from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 import { BsHouseDoor } from "react-icons/bs";
 
 const Navbar = () => {
   return (
-    <div className="container">
-      <div className="wrapper">
+    <div className={classes.container}>
+      <div className={classes.wrapper}>
         <Link to="/" className="left">
           Ghar Dera <BsHouseDoor />
         </Link>
-        <ul className="center">
-          <li className="listItem">Home</li>
-          <li className="listItem">About</li>
-          <li className="listItem">Popular</li>
-          <li className="listItem">Contact</li>
+        <ul className={classes.center}>
+          <li className={classes.listItem}>Home</li>
+          <li className={classes.listItem}>About</li>
+          <li className={classes.listItem}>Popular</li>
+          <li className={classes.listItem}>Contact</li>
         </ul>
-        <div className="right">
+        <div className={classes.right}>
           <Link to="/signup">Sign up</Link>
           <Link to="/login">Login</Link>
         </div>
