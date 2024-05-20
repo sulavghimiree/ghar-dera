@@ -6,3 +6,66 @@
   background-color: rgba(0, 0, 0, 0.4);
   background-blend-mode: darken;
 }
+
+.wrapper {
+  max-width: 1180px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper > h2 {
+  font-size: 46px;
+  font-weight: bold;
+  color: #fff;
+  white-space: nowrap;
+  margin-bottom: 2.5rem;
+}
+
+.wrapper > h5 {
+  color: #efefef;
+  font-size: 36px;
+  margin-bottom: 3rem;
+}
+
+.wrapper > .options {
+  width: 50%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+}
+
+.giveLocation {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.findButton {
+  margin-top: 10px;
+  padding: 0.75rem 1.5rem;
+  font-size: 18px;
+  background: #2500ac;
+  color: white;
+  border: 1px solid #2500ac;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 150ms all;
+}
+
+.findButton:hover {
+  background-color: white;
+  color: #2500ac;
+  border: 1px solid #2500ac;
+}

@@ -13,10 +13,12 @@ const Hero = () => {
         <h5>Search the best room according to your choice</h5>
         <div className={classes.options}>
           <input
+            className={classes.giveLocation}
             onChange={(e) => setLocation(e.target.value)}
             type="text"
             placeholder="Select the location"
           />
+          <button className={classes.findButton}>Search</button>
         </div>
       </div>
     </div>
