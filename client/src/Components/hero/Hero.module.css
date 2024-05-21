@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  height: calc(100vh - 60px);
   width: 100%;
   background-image: url(../../assets/background.jpg);
   background-size: cover;
@@ -50,6 +50,8 @@
   border-radius: 20px;
   border: 1px solid black;
   margin-bottom: 10px;
+  outline: none;
+  font-size: 16px;
 }
 
 .findButton {

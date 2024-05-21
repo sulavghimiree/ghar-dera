@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <div className={classes.container}>
       <div className={classes.wrapper}>
-        <Link to="/" className="left">
+        <Link to="/" className={classes.left}>
           Ghar Dera <BsHouseDoor />
         </Link>
         <ul className={classes.center}>
